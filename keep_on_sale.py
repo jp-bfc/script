@@ -82,7 +82,7 @@ inner join STORESQL.dbo.POS_TAB pos on obj.F01 = pos.F01
 inner join STORESQL.dbo.RPC_TAB rpc on obj.F18 = rpc.F18
 inner join STORESQL.dbo.sdp_tab sdp on pos.F04 = sdp.F04
 left join (select * from STORESQL.dbo.RPT_ITM_D where F1034 = 3) rpt_d on (prc.F01 = rpt_d.F01 and rpt_d.F254 >= prc.F137 and rpt_d.F254 < getdate())
-where prc.F113 = 'SALE' and obj.F18 not in (21, 23) and prc.F1014 < '2022-11-04 00:00:00.000' and prc.F1208 is null
+where prc.F113 = 'SALE' and obj.F18 not in (21, 23) and prc.F1014 < '2022-11-18 00:00:00.000' and prc.F1208 is null
 group by prc.F01, rpc.F1024, sdp.F1022, obj.F29, obj.F155, prc.F1014, prc.F30, prc.F113, prc.F136, prc.F137, prc.F1007, prc.F1011, prc.F1013, prc.F138, prc.F253) t
 left join (select * from STORESQL.dbo.RPT_ITM_D where F1034 = 3) before_sale on (t.UPC = before_sale.F01 and before_sale.F254 < t.[Sale Start] and before_sale.F254 >= dateadd(day, -90, t.[Sale Start]))
 group by t.UPC,t.[Sale Revenue], t.[Sale Volume], t.[Sale COGS], t.[Sale Profit], t.[Sale Margin],t.[Dept], t.[Sub-Dept], t.[Desc], t.Brand, t.[Sale End Date], t.Price, t.[Type of Price],
@@ -157,7 +157,7 @@ sheets = build('sheets', 'v4', credentials=sheet_creds)
 
 output_workbook = drive.files().create(
             body={
-            'name' : 'Keep On Sale - Late October - 2022' ,
+            'name' : 'Keep On Sale - Early November - 2022' ,
             'parents' : ['%s' % keep_on_sale_folder_id],
             'mimeType' : 'application/vnd.google-apps.spreadsheet'
             },
